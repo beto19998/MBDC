@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ibtehal Abu Hanea" />
+    <meta name="keywords" content="online supermarket" />
+    <meta name="description" content="online shopping" />
+    <link rel="stylesheet" href="My Database Style.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <script>
+        function stickyMenu() {
+            var sticky = document.getElementById('sticky');
+            if (window.pageYOffset > 220) {
+                sticky.classList.add('sticky');
+            }
+            else {
+                sticky.classList.remove('sticky');
+            }
+        }
+        window.onscroll = function () {
+            stickyMenu();
+        }
+    </script>
+
+
+</head>
+<body>
+    <div class="view">
+        <div class="page_title">Mobile Blood Donation Center</div>
+    </div>
+    <div class="menu" id="sticky">
+        <ul class="menu_ul">
+            <li> <a href="#" class="a_menu">Home</a> </li>
+
+        </ul>
+        <div class="search_box">
+            <form>
+
+                <input type="text" placeholder="Search..." name="search" class="search_input" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+
+
+    </div>
+    <div class="container">
+        <a href="#PersonalInfo">
+            <div class="categories">
+                <img src="https://media.istockphoto.com/vectors/personal-info-data-icon-identification-card-icon-personal-info-data-vector-id1191487541?k=6&m=1191487541&s=170667a&w=0&h=EkigJ4LlnN7FhRaVt64x0CQUYU6hoyq2wtsUlQVbShc=" class="item_image" />
+                <div class="image_title">Display PersonalInfo</div>
+            </div>
+        </a>
+        <a href="#HealthInfo">
+            <div class="categories">
+                <img src="https://cdn3.vectorstock.com/i/1000x1000/29/92/patient-medical-record-icon-flat-design-vector-7212992.jpg" class="item_image" />
+                <div class="image_title">Display HealthInfo</div>
+            </div>
+        </a>
+        <a href="#EditPersonalInfo">
+            <div class="categories">
+                <img src="https://www.osrah.sa/wp-content/uploads/2013/06/Office-Customer-Male-Light-icon1.png" class="item_image" />
+                <div class="image_title">CRUE PersonalInfo</div>
+            </div>
+        </a>
+        <a href="#EditHealthInfo">
+            <div class="categories">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9NDkUx7XuDr0oiOZnxfyMn942T3pfpRC52BQcjyzjWEV_Pzv1l0Q-S4CwmsCrar4404s&usqp=CAU" class="item_image" />
+                <div class="image_title">CRUE HealthInfo</div>
+            </div>
+        </a>
+    </div>
+
+    <!--PersonalInfo-->
+    <div class="deals_container" id="PersonalInfo">
+        <div class="view">
+            <div class="title">Personal Info</div>
+
+            <table class="table table-dark  text-white">
+                <thead>
+                <th>Sno</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Phone</th>
+                <th>Location</th>
+                </thead>
+                <tbody id="tbody1">
+				<tr><td>1</td><td>123456</td><td>Ibteha</td><td>21</td><td>female</td><td>0595423563</td><td>Jerusalem</td></tr>
+				<tr><td>2</td><td>789456</td><td>Ameer</td><td>55</td><td>male</td><td>0598311950</td><td>Hebron</td></tr>
+                </tbody>
+            </table>
+            <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+            <script>
+                // Your web app's Firebase configuration
+                // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+                var firebaseConfig = {
+                    apiKey: "AIzaSyDNxh7rko76Cp7Y7FY7WyCwlt3dvpLIPbg",
+                    authDomain: "bloodbank-b4e42.firebaseapp.com",
+                    databaseURL: "https://bloodbank-b4e42-default-rtdb.firebaseio.com",
+                    projectId: "bloodbank-b4e42",
+                    storageBucket: "bloodbank-b4e42.appspot.com",
+                    messagingSenderId: "1048320410051",
+                    appId: "1:1048320410051:web:8ca5e8c04b31bf7009bd76",
+                    measurementId: "G-3JQ41B6B64"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+                firebase.analytics();
+                //get data
+                function SelectAllData() {
+                    firebase.database().ref('PersonalInfo').once('value',
+                        function (AllRecords) {
+                            AllRecords.forEach(
+
+                                function (CurrentRecord) {
+                                    var ID = CurrentRecord.val().ID;
+                                    var NAME = CurrentRecord.val().Name;
+                                    var AGE = CurrentRecord.val().Age;
+                                    var GENDER = CurrentRecord.val().Gender;
+                                    var PHONE = CurrentRecord.val().Phone;
+                                    var LOCATION = CurrentRecord.val().Location;
+                                    AddItemsToTable(ID, NAME, AGE, GENDER, PHONE, LOCATION);
+                                }
+                            );
+                        });
+                }
+                Window.onload = SelectAllData;
+                //fill the table
+                var seqNum = 0;
+                function AddItemsToTable(ID, NAME, AGE, GENDER, PHONE, LOCATION) {
+                    var tbody = document.getElementById('tbody1');
+                    var trow = document.createElement('tr');
+                    var td1 = document.createElement('td');
+                    var td2 = document.createElement('td');
+                    var td3 = document.createElement('td');
+                    var td4 = document.createElement('td');
+                    var td5 = document.createElement('td');
+                    var td6 = document.createElement('td');
+                    var td7 = document.createElement('td');
+                    td1.innerHTML = ++seqNum;
+                    td2.innerHTML = ID;
+                    td3.innerHTML = NAME;
+                    td4.innerHTML = AGE;
+                    td5.innerHTML = GENDER;
+                    td6.innerHTML = PHONE;
+                    td7.innerHTML = LOCATION;
+                    trow.appendChild(td1); trow.appendChild(td2); trow.appendChild(td3); trow.appendChild(td4); trow.appendChild(td5); trow.appendChild(td6); trow.appendChild(td7);
+                    tbody.appendChild(trow);
+                }
+            </script>
+        </div>
+    </div>
+    <!--HealthInfo-->
+    <div class="deals_container" id="HealthInfo">
+        <div class="view">
+            <div class="title">Health Info</div>
+            <table class="table table-dark  text-white">
+                <thead>
+                <th>Sno</th>
+                <th>ID</th>
+                <th>Sugar Rate</th>
+                <th>Weight</th>
+                <th>Presssure</th>
+                <th>Diseases</th>
+                <th>Blood Type</th>
+                </thead>
+                <tbody id="tbody1">
+				<tr><td>1</td><td>123456</td><td>80</td><td>53</td><td>120/80</td><td>None</td><td>A+</td></tr>
+				<tr><td>2</td><td>789456</td><td>99</td><td>60</td><td>Less Than 120/80</td><td>None</td><td>AB</td></tr>
+                </tbody>
+            </table>
+            <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+            <script>
+                // Your web app's Firebase configuration
+                // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+                var firebaseConfig = {
+                    apiKey: "AIzaSyDNxh7rko76Cp7Y7FY7WyCwlt3dvpLIPbg",
+                    authDomain: "bloodbank-b4e42.firebaseapp.com",
+                    databaseURL: "https://bloodbank-b4e42-default-rtdb.firebaseio.com",
+                    projectId: "bloodbank-b4e42",
+                    storageBucket: "bloodbank-b4e42.appspot.com",
+                    messagingSenderId: "1048320410051",
+                    appId: "1:1048320410051:web:8ca5e8c04b31bf7009bd76",
+                    measurementId: "G-3JQ41B6B64"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+                firebase.analytics();
+
+                //get data
+                function SelectAllData() {
+                    firebase.database().ref('HealthInfo').once('value',
+                        function (AllRecords) {
+                            AllRecords.forEach(
+
+                                function (CurrentRecord) {
+                                    var ID = CurrentRecord.val().ID;
+                                    var SugarRate = CurrentRecord.val().SugarRate;
+                                    var Weight = CurrentRecord.val().Weight;
+                                    var Presssure = CurrentRecord.val().Presssure;
+                                    var Diseases = CurrentRecord.val().Diseases;
+                                    var BloodType = CurrentRecord.val().BloodType;
+                                    AddItemsToTable(ID, SugarRate, Weight, Presssure, Diseases, BloodType);
+
+                                }
+
+
+                            );
+                        });
+                }
+                Window.onload = SelectAllData;
+                //fill the table
+                var seqNum = 0;
+                function AddItemsToTable(ID, SugarRate, Weight, Presssure, Diseases, BloodType) {
+                    var tbody = document.getElementById('tbody1');
+                    var trow = document.createElement('tr');
+                    var td1 = document.createElement('td');
+                    var td2 = document.createElement('td');
+                    var td3 = document.createElement('td');
+                    var td4 = document.createElement('td');
+                    var td5 = document.createElement('td');
+                    var td6 = document.createElement('td');
+                    var td7 = document.createElement('td');
+                    td1.innerHTML = ++seqNum;
+                    td2.innerHTML = ID;
+                    td3.innerHTML = SugarRate;
+                    td4.innerHTML = Weight;
+                    td5.innerHTML = Presssure;
+                    td6.innerHTML = Diseases;
+                    td7.innerHTML = BloodType;
+                    trow.appendChild(td1); trow.appendChild(td2); trow.appendChild(td3); trow.appendChild(td4); trow.appendChild(td5); trow.appendChild(td6); trow.appendChild(td7);
+                    tbody.appendChild(trow);
+                }
+
+            </script>
+
+        </div>
+    </div>
+    <!--EditPersonalInfo-->
+    <div class="deals_container" id="EditPersonalInfo">
+        <div class="view">
+            <div class="title">CRUE Personal Info</div>
+          
+                <div class="w3-card-4">
+                    <div class="w3-container w3-black">
+                    </div>
+                    <form class="w3-container" action="/action_page.php" style="margin-left:35%">
+                        <p>
+                            <label class="w3-text-black"><b> Id</b></label>
+                            <input class="w3-input w3-border w3-sand" style="width:30%" id="idbox" type="text">
+                        </p>
+                        <p>
+                            <label class="w3-text-black"><b>  Name</b></label>
+                            <input class="w3-input w3-border w3-sand " style="width:30%" id="namebox" type="text">
+                        </p>
+                        <p>
+                            <label class="w3-text-black"><b>  Age</b></label>
+                            <input class="w3-input w3-border w3-sand" style="width:30%" id="agebox" type="text">
+                        </p>
+                        <p>
+                            <label class="w3-text-black"><b> Gender</b></label>
+                            <input class="w3-input w3-border w3-sand" style="width:30%" id="genderbox" type="text">
+                        </p>
+                        <p>
+                            <label class="w3-text-black"><b> Phone </b></label>
+                            <input class="w3-input w3-border w3-sand" style="width:30%" id="phonebox" type="text">
+                        </p>
+                        <p>
+                            <label class="w3-text-black"><b>  Locaion  </b></label>
+                            <input class="w3-input w3-border w3-sand " style="width:30%" id="locayionbox" type="text">
+                        </p>
+                        </p>
+                    </form>
+                </div>
+                <button class="w3-button w3-black w3-round-large" style="margin-left:33%" id="insert">CREATE</button>
+                <button class="w3-button w3-black w3-round-large" id="select">SELECT</button>
+                <button class="w3-button w3-black w3-round-large" id="edit">UPDATE</button>
+                <button class="w3-button w3-black w3-round-large" id="remove">REMOVE</button>
+            
+            <script>
+                var IdV, NameV, AgeV, GenderV, PhoneV, LocaionV;
+                function Ready() {
+                    IdV = document.getElementById('idbox').value;
+                    NameV = document.getElementById('namebox').value;
+                    AgeV = document.getElementById('agebox').value;
+                    GenderV = document.getElementById('genderbox').value;
+                    PhoneV = document.getElementById('phonebox').value;
+                    LocaionV = document.getElementById('locationbox').value;
+                }
+
+                //INSERT
+                document.getElementById('insert').onclick = function () {
+                    Ready();
+                    firebase.database().ref('PersonalInfo' + IdV).set({
+                        ID: IdV,
+                        Name: NameV,
+                        Age: AgeV,
+                        Gender: GenderV,
+                        Phone: PhoneV,
+                        Location: LocaionV
+                    });
+                }
+                //selection
+
+                document.getElementById("select").onclick = function () {
+                    Ready();
+                    firebase.database().ref('PersonalInfo' + IdV).on('value', function (snapshot) {
+                        document.getElementById('idbox').value = snapshot.val().ID;
+                        document.getElementById('namebox').value = snapshot.val().Name;
+                        document.getElementById('agebox').value = snapshot.val().Age;
+                        document.getElementById('genderbox').value = snapshot.val().Gender;
+                        document.getElementById('phonebox').value = snapshot.val().Phone;
+                        document.getElementById('locationbox').value = snapshot.val().Location;
+
+
+                    });
+                }
+                //update
+                document.getElementById('edit').onclick = function () {
+                    Ready();
+                    firebase.database().ref('PersonalInfo' + IdV).update({
+                        ID: IdV,
+                        Name: NameV,
+                        Age: AgeV,
+                        Gender: GenderV,
+                        Phone: PhoneV,
+                        Location: LocaionV
+                    });
+                }
+                //delete
+                document.getElementById('remove').onclick = function () {
+                    Ready();
+                    firebase.database().ref('PersonalInfo' + IdV).remove();
+                }
+
+                                                                                                                                                                                            }
+
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        </div>
+
+    <!--EditHealthlInfo-->
+    <div class="deals_container" id="EditHealthInfo">
+        <  <div class="view">
+            <div class="title">CRUE Health Info</div>
+
+            <div class="w3-card-4">
+                <div class="w3-container w3-black">
+                </div>
+                <form class="w3-container" action="/action_page.php" style="margin-left:35%">
+                    <p>
+                        <label class="w3-text-black"><b> Id</b></label>
+                        <input class="w3-input w3-border w3-sand" style="width:30%" id="idbox" type="text">
+                    </p>
+                    <p>
+                        <label class="w3-text-black"><b>  SugarRate</b></label>
+                        <input class="w3-input w3-border w3-sand " style="width:30%" id="SugarRatebox" type="text">
+                    </p>
+                    <p>
+                        <label class="w3-text-black"><b>  Weight</b></label>
+                        <input class="w3-input w3-border w3-sand" style="width:30%" id="Weightbox" type="text">
+                    </p>
+                    <p>
+                        <label class="w3-text-black"><b> Diseases</b></label>
+                        <input class="w3-input w3-border w3-sand" style="width:30%" id="Diseasesbox" type="text">
+                    </p>
+                    <p>
+                        <label class="w3-text-black"><b> Pressure </b></label>
+                        <input class="w3-input w3-border w3-sand" style="width:30%" id="Pressurebox" type="text">
+                    </p>
+                    <p>
+                        <label class="w3-text-black"><b>  Blood Type  </b></label>
+                        <input class="w3-input w3-border w3-sand " style="width:30%" id="BloodTypebox" type="text">
+                    </p>
+                    </p>
+                </form>
+            </div>
+            <button class="w3-button w3-black w3-round-large" style="margin-left:33%" id="insert">CREATE</button>
+            <button class="w3-button w3-black w3-round-large" id="select">SELECT</button>
+            <button class="w3-button w3-black w3-round-large" id="edit">UPDATE</button>
+            <button class="w3-button w3-black w3-round-large" id="remove">REMOVE</button>
+
+            <script>
+                var IdV, SugarRateV, WeightV, DiseasesV, PressureV, BloodTypeV;
+                function Ready() {
+                    IdV = document.getElementById('idbox').value;
+                    SugarRateV = document.getElementById('SugarRatebox').value;
+                    WeightV = document.getElementById('Weightbox').value;
+                    DiseasesV = document.getElementById('Diseasesbox').value;
+                    PressureV = document.getElementById('Pressurebox').value;
+                    BloodTypeV = document.getElementById('BloodTypebox').value;
+                }
+
+                //INSERT
+                document.getElementById('insert').onclick = function () {
+                    Ready();
+                    firebase.database().ref('HealthInfo' + IdV).set({
+                        ID: IdV,
+                        SugarRate: SugarRateV,
+                        Weight: WeightV,
+                        Diseases: DiseasesV,
+                        Pressure: PressureV,
+                        BloodType: BloodTypeV
+                    });
+                }
+                //selection
+
+                document.getElementById("select").onclick = function () {
+                    Ready();
+                    firebase.database().ref('HealthInfo' + IdV).on('value', function (snapshot) {
+                        document.getElementById('idbox').value = snapshot.val().ID;
+                        document.getElementById('SugarRatebox').value = snapshot.val().SugarRate;
+                        document.getElementById('Weightbox').value = snapshot.val().Weight;
+                        document.getElementById('Diseasesbox').value = snapshot.val().Diseases;
+                        document.getElementById('Pressurebox').value = snapshot.val().Pressure;
+                        document.getElementById('BloodTypebox').value = snapshot.val().BloodType;
+
+
+                    });
+                }
+                //update
+                document.getElementById('edit').onclick = function () {
+                    Ready();
+                    firebase.database().ref('HealthInfo' + IdV).update({
+                        ID: IdV,
+                        SugarRate: SugarRateV,
+                        Weight: WeightV,
+                        Diseases: DiseasesV,
+                        Pressure: PressureV,
+                        BloodType: BloodTypeV
+                    });
+                }
+                //delete
+                document.getElementById('remove').onclick = function () {
+                    Ready();
+                    firebase.database().ref('HealthInfo' + IdV).remove();
+                }
+
+                                                                                                                                                                                                        }
+
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+    <!--footer-->
+    <div class="vieww">
+        <div class="footer">
+            <div class="foteer_title"> Its Make A Difference</div>
+        </div>
+    </div>
+    <div class="copyrights">
+        &#169 By Ibtehal Abu Hanea 2021
+    </div>
+
+  
+
+</body>
+</html>
