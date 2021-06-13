@@ -1,0 +1,172 @@
+﻿.view, .vieww {
+    background-image: url('https://zameenblog.s3.amazonaws.com/blog/wp-content/uploads/2019/08/cover-image-2-4.jpg');
+    height: max-content;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.page_title {
+    background: rgb(0,0,0,0.5);
+    text-align: center;
+    color: white;
+    padding: 60px;
+    font-variant: small-caps;
+    font-size: 100px;
+    font-family: fantasy;
+    letter-spacing: 20px;
+}
+
+#sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.menu {
+    background: #ff4d4d;
+    text-align: center;
+}
+
+.menu_ul {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+    .menu_ul li {
+        font-size: 17px;
+        list-style: none;
+        display: inline-block;
+        padding: 25px 25px 26px 25px;
+    }
+
+.a_menu {
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+}
+
+.menu_ul li:hover {
+    background: #801a00;
+    transform: scale(1.1);
+}
+/*for search*/
+.search_box {
+    border: 1px solid white;
+    border-radius: 50px;
+    background: white;
+    width: max-content;
+    height: fit-content();
+    display: inline-block;
+    float: right;
+    margin: 20px;
+}
+
+    .search_box:hover {
+        box-shadow: 0 0 10px 2px #5b8c5a;
+        border: 1px solid #5b8c5a;
+    }
+
+.search_input {
+    width: 250px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    background: transparent;
+    margin: 15px 0 0 10px;
+}
+
+i {
+    font-size: 20px;
+    margin: 0 10px 0 0;
+    /*  height:max-content;
+        width:max-content;*/
+}
+
+.container {
+    margin: 50px 50px 50px 5%;
+    width: 90%;
+    text-align: center;
+    color: black;
+}
+
+.categories, .items {
+    width: max-content;
+    margin: 25px;
+    border: 1px solid #184d47;
+    border-radius: 0 0 50px 50px;
+    display: inline-block;
+}
+
+    .categories:hover, .items:hover {
+        box-shadow: 0 0 10px 3px #184d47;
+    }
+
+.item_image {
+    height: 200px;
+    width: 200px;
+    border-radius: 0 0 50px 50px;
+    padding: 10px;
+}
+
+.image_title {
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+.title {
+    padding: 50px;
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: 10px;
+    color: white;
+    background: rgba(0,0,0,0.5);
+    text-align: center;
+}
+/*for button*/
+.input_box {
+    border: 1px solid white;
+    border-radius: 50px;
+    background: white;
+    width: max-content;
+    height: fit-content();
+    display: inline-block;
+    float: left;
+    margin: 20px;
+}
+
+
+/*for footer*/
+.vieww {
+    background-image: url('https://dmint.org/wp-content/uploads/2019/03/Donate.jpg');
+}
+
+.footer {
+    background: rgba(0,0,0,0.5);
+    text-align: center;
+    padding: 20px;
+}
+.foteer_title {
+  
+    text-align: center;
+    color: white;
+    padding: 60px;
+    font-variant: small-caps;
+    font-size: 100px;
+    font-family: fantasy;
+    letter-spacing: 20px;
+}
+
+.copyrights {
+    font-size: 16px;
+    font-family: Verdana,Arial,sans-serif;
+    text-align: center;
+    margin: 15px;
+}
